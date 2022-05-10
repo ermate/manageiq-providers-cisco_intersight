@@ -3,6 +3,8 @@ module ManageIQ
     module CiscoIntersight
       module ToolbarOverrides
         class PhysicalServerCenter < ::ApplicationHelper::Toolbar::Override
+          #self.needs :@record
+
           button_group(
             'physical_server_policy_choice',
             [
@@ -26,6 +28,8 @@ module ManageIQ
                     :confirm => N_("Decommission this server?"),
                     :enabled => true,
                     :options => {:feature => :decommission}
+                    # TODO: :klass assignment doesn't work for our desired functionality
+                    #:klass => ManageIQ::Providers::CiscoIntersight::PhysicalInfraManager::DecommissionServerButton
                   ),
                   api_button(
                     :physical_server_recommission,
@@ -40,6 +44,8 @@ module ManageIQ
                     :confirm => N_("Recommission this server?"),
                     :enabled => true,
                     :options => {:feature => :recommission}
+                    # TODO: :klass assignment doesn't work for our desired functionality
+                    #:klass => ManageIQ::Providers::CiscoIntersight::PhysicalInfraManager::RecommissionServerButton
                   ),
                   separator(),
                   button(
@@ -53,7 +59,7 @@ module ManageIQ
                                                    :modal_title    => N_('Assign Server Profile'),
                                                    :component_name => 'ServerProfileForm',
                                                    :action         => 'assign_server'}},
-                                                   :klass          => ManageIQ::Providers::CiscoIntersight::PhysicalInfraManager::AssignServerProfileButton
+                    :klass  => ManageIQ::Providers::CiscoIntersight::PhysicalInfraManager::AssignServerProfileButton
                   ),
                   button(
                     :physical_server_deploy_server_profile,
@@ -66,7 +72,7 @@ module ManageIQ
                                                    :modal_title    => N_('Deploy Server Profile'),
                                                    :component_name => 'ServerProfileForm',
                                                    :action         => 'deploy_server'}},
-                                                   :klass          => ApplicationHelper::Button::ButtonWithoutRbacCheck
+                    :klass  => ManageIQ::Providers::CiscoIntersight::PhysicalInfraManager::DeployServerProfileButton
                   ),
                   button(
                     :physical_server_unassign_server_profile,
@@ -79,7 +85,7 @@ module ManageIQ
                                                    :modal_title    => N_('Unassign Server Profile'),
                                                    :component_name => 'ServerProfileForm',
                                                    :action         => 'unassign_server'}},
-                                                   :klass          => ManageIQ::Providers::CiscoIntersight::PhysicalInfraManager::UnassignServerProfileButton
+                    :klass  => ManageIQ::Providers::CiscoIntersight::PhysicalInfraManager::UnassignServerProfileButton
                   ),
                 ]
               )

@@ -2,6 +2,6 @@ class ManageIQ::Providers::CiscoIntersight::PhysicalInfraManager::DeployServerPr
   needs :@record
 
   def disabled?
-    @record.assigned_server_profile.nil? or !@record.associated_server.nil?
+    @record.assigned_server_profile.nil? or !@record.associated_server_profile.nil?
   end
 end

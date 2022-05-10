@@ -25,8 +25,10 @@ module ManageIQ
                     },
                     :confirm => N_("Decommission selected servers?"),
                     :enabled => true,
-                    :onwhen  => "1+",
+                    :onwhen  => "1",
                     :options => {:feature => :decommission}
+                    # TODO: :klass assignment doesn't work for our desired functionality
+                    #:klass => ManageIQ::Providers::CiscoIntersight::PhysicalInfraManager::DecommissionServerButton
                   ),
                   api_button(
                     :physical_server_recommission,
@@ -40,8 +42,10 @@ module ManageIQ
                     },
                     :confirm => N_("Recommission selected servers?"),
                     :enabled => true,
-                    :onwhen  => "1+",
+                    :onwhen  => "1",
                     :options => {:feature => :recommission}
+                    # TODO: :klass assignment doesn't work for our desired functionality
+                    #:klass => ManageIQ::Providers::CiscoIntersight::PhysicalInfraManager::RecommissionServerButton
                   ),
                   separator(),
                   button(
@@ -56,6 +60,7 @@ module ManageIQ
                                                    :component_name => 'ServerProfileForm',
                                                    :action         => 'assign_server'}},
                     :onwhen  => "1",
+                    # TODO: :klass assignment doesn't work correctly for our desired functionality - options are hidden no matter the condition defined in the class
                     :klass  => ManageIQ::Providers::CiscoIntersight::PhysicalInfraManager::AssignServerProfileButton
                   ),
                   button(
@@ -70,7 +75,8 @@ module ManageIQ
                                                    :component_name => 'ServerProfileForm',
                                                    :action         => 'deploy_server'}},
                     :onwhen  => "1",
-                    :klass  => ApplicationHelper::Button::ButtonWithoutRbacCheck
+                    # TODO: :klass assignment doesn't work correctly for our desired functionality - options are hidden no matter the condition defined in the class
+                    :klass  => ManageIQ::Providers::CiscoIntersight::PhysicalInfraManager::DeployServerProfileButton
                   ),
                   button(
                     :physical_server_unassign_server_profile,
@@ -84,7 +90,8 @@ module ManageIQ
                                                    :component_name => 'ServerProfileForm',
                                                    :action         => 'unassign_server'}},
                     :onwhen  => "1",
-                    :klass  => ApplicationHelper::Button::ButtonWithoutRbacCheck
+                    # TODO: :klass assignment doesn't work correctly for our desired functionality - options are hidden no matter the condition defined in the class
+                    :klass  => ManageIQ::Providers::CiscoIntersight::PhysicalInfraManager::UnassignServerProfileButton
                   ),
                 ]
               )

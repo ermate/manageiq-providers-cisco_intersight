@@ -2,7 +2,6 @@ class ManageIQ::Providers::CiscoIntersight::PhysicalInfraManager::RecommissionSe
   needs :@record
 
   def disabled?
-    # TODO:
-    return true
+    !@record.power_state.eql?("decommissioned")
   end
 end
