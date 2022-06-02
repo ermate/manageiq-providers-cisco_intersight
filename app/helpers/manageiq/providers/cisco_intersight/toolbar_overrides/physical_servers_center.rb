@@ -93,6 +93,33 @@ module ManageIQ
                     # TODO: :klass assignment doesn't work correctly for our desired functionality - options are hidden no matter the condition defined in the class
                     :klass  => ManageIQ::Providers::CiscoIntersight::PhysicalInfraManager::UnassignServerProfileButton
                   ),
+                  separator,
+                  button(
+                    :physical_server_profile_deploy_server,
+                    'pficon fa-lg',
+                    t = N_('Deploy Server Profile'),
+                    t,
+                    :data  => {'function'      => 'sendDataWithRx',
+                               'function-data' => {:controller     => 'provider_dialogs',
+                                                   :button         => :physical_server_profile_deploy_server,
+                                                   :modal_title    => N_('Deploy Server Profile'),
+                                                   :component_name => 'ServerProfileForm',
+                                                   :action         => 'deploy_server'}},
+                    :klass => ApplicationHelper::Button::ButtonWithoutRbacCheck
+                  ),
+                  button(
+                    :physical_server_profile_unassign_server,
+                    'pficon fa-lg',
+                    t = N_('Unassign Server Profile'),
+                    t,
+                    :data  => {'function'      => 'sendDataWithRx',
+                               'function-data' => {:controller     => 'provider_dialogs',
+                                                   :button         => :physical_server_profile_unassign_server,
+                                                   :modal_title    => N_('Unassign Server Profile'),
+                                                   :component_name => 'ServerProfileForm',
+                                                   :action         => 'unassign_server'}},
+                    :klass => ApplicationHelper::Button::ButtonWithoutRbacCheck
+                  )
                 ]
               )
             ]

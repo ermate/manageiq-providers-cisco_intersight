@@ -45,6 +45,9 @@ module ManageIQ::Providers::CiscoIntersight
 
     def physical_server_profiles
       @physical_server_profiles ||= server_api.get_server_profile_list.results
+    rescue IntersightClient::ApiError => e
+      @physical_server_profiles = {}
+      _log.error("Collecting process of Server Profiles has failed: #{e.response_body}. There might be a potential license issue.")
     end
 
     def device_contract_informations_by_moid
@@ -54,8 +57,8 @@ module ManageIQ::Providers::CiscoIntersight
     end
 
     def firmware_firmware_summary_by_moid
-      @firmware_firmware_summary_by_moid ||= firmware_firmware_summaries.index_by do
-        |firmware_firmware_summary| firmware_firmware_summary.server.moid
+      @firmware_firmware_summary_by_moid ||= firmware_firmware_summaries.index_by do |firmware_firmware_summary|
+        firmware_firmware_summary.server.moid
       end
     end
 
@@ -99,6 +102,8 @@ module ManageIQ::Providers::CiscoIntersight
     delegate :get_compute_rack_unit_by_moid, :to => :compute_api
 
     delegate :get_network_element_summary_by_moid, :to => :network_api
+
+    delegate :get_adapter_host_eth_interface_by_moid, :to => :adapter_api
 
     private
 
