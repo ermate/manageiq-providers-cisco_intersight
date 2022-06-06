@@ -17,5 +17,13 @@ module ManageIQ::Providers::CiscoIntersight
     def power_up
       change_state(:power_up)
     end
+
+    supports :recommission do
+      unsupported_reason_add(:recommission, _("Cannot recommission an active server")) if !@record.power_state.eql?("decommissioned")
+    end
+
+    supports :decommission do
+      unsupported_reason_add(:decommission, _("Cannot decommission an inactive server")) if @record.power_state.eql?("decommissioned")
+    end
   end
 end

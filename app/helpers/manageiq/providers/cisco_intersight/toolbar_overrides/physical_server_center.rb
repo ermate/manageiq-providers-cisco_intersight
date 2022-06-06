@@ -27,9 +27,8 @@ module ManageIQ
                     },
                     :confirm => N_("Decommission this server?"),
                     :enabled => true,
+                    # TODO: feature doesn't work as intended
                     :options => {:feature => :decommission}
-                    # TODO: :klass assignment doesn't work for our desired functionality
-                    #:klass => ManageIQ::Providers::CiscoIntersight::PhysicalInfraManager::DecommissionServerButton
                   ),
                   api_button(
                     :physical_server_recommission,
@@ -43,10 +42,9 @@ module ManageIQ
                     },
                     :confirm => N_("Recommission this server?"),
                     :enabled => true,
+                    # TODO: feature doesn't work as intended
                     :options => {:feature => :recommission}
-                    # TODO: :klass assignment doesn't work for our desired functionality
-                    #:klass => ManageIQ::Providers::CiscoIntersight::PhysicalInfraManager::RecommissionServerButton
-                  ),
+                    ),
                   separator,
                   button(
                     :physical_server_profile_assign_server,
